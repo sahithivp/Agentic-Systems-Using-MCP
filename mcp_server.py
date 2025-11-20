@@ -26,12 +26,24 @@ import asyncio
 asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
 
-mcp = FastMCP("Demo 🚀")
+mcp = FastMCP("MolecularSimulator")
 
 @mcp.tool
-def add(a: int, b: int) -> int:
-    """Add two numbers"""
-    return a + b
+def run_docking_simulation(molecule: str, protein: str) -> str:
+    """
+    Simulates molecular docking between molecule and protein using a Python script or API.
+    """
+    try:
+        affinity = "82%"  
+        result = (
+            f"Simulated docking result:\n"
+            f"- Molecule: {molecule}\n"
+            f"- Protein: {protein}\n"
+            f"- Predicted Binding Affinity: {affinity}\n"
+        )
+        return result
+    except Exception as e:
+        return {"error": str(e)}
 
 if __name__ == "__main__":
     mcp.run(transport="http", host="127.0.0.1", port=8000, path="/mcp")

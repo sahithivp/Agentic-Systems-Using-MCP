@@ -14,19 +14,14 @@ def home():
 
 @app.post("/chat")
 async def chat_with_agent(topic: str):
-    # 1️⃣ Hypothesis
     hypothesis = research_planner(topic)
 
-    # 2️⃣ Literature Retrieval
     papers = retriever(hypothesis)
 
-    # 3️⃣ Molecular Simulation (example params)
     sim_result = await molecular_simulator("Molecule X", "Protein Y")
 
-    # 4️⃣ Evaluation
     evaluation = evaluator(sim_result)
 
-    # 5️⃣ Reporting
     report = reporter(hypothesis, evaluation)
 
     return {
