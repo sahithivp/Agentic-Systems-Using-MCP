@@ -1,0 +1,19 @@
+from openai import OpenAI
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+def reporter(hypothesis: str, evaluation: str):
+    prompt = f"""
+    Write a short technical summary of the experiment:
+    Hypothesis: {hypothesis}
+    Evaluation: {evaluation}
+    Propose next steps.
+    """
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[{"role": "user", "content": prompt}]
+    )
+    return response.choices[0].message.content
